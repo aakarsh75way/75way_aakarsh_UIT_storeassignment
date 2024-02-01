@@ -1,21 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import EmployeePopup from "./EmployeePopup";
+import { StoreOverviewProps } from "../../../../utils/types";
 
-export type Store = {
-  _id: string;
-  name: string;
-  openTime: string;
-  closeTime: string;
-  employees: Array<string>;
-  timeSlotInterval: number;
-  capacityPerSlot: number;
-  __v: number;
-};
 
-interface StoreOverviewProps {
-  store: Store;
-}
+
 
 const StoreOverview = ({ store }: StoreOverviewProps) => {
   const role = localStorage.getItem("role");

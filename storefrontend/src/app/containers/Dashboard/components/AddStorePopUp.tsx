@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { FormData } from "../../../../utils/types";
 
-export type FormData = {
-  name: string;
-  openTime: string;
-  closeTime: string;
-  timeSlotInterval: string;
-  capacityPerSlot: string;
-};
+
 type Props = {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
 };

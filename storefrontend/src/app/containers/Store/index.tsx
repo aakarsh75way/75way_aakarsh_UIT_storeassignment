@@ -2,22 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
 import StoreOverview from '../Dashboard/components/StoreOverview';
 import { Link } from 'react-router-dom';
+import { Store } from '../../../utils/types';
 
-type Store = {
-  _id: string;
-  name: string;
-  openTime: string;
-  closeTime: string;
-
-  employees: Array<string>; 
-  timeSlotInterval: number;
-  capacityPerSlot: number;
-  __v: number;
-};
-  
 const StorePage = () => {
+ 
   const [stores, setStores] = useState<Store[] | null>(null);
-
+  const role=localStorage.getItem("role")
   const fetchStores = async () => {
     try {
       const response = await fetch("http://localhost:4000/api/addStore");
@@ -43,7 +33,7 @@ const StorePage = () => {
           ))
         ) : (
           <Link to="/" className="underline w-[100%] text-[40px] text-center text-blue-500">
-            NO STORES AVAILABLE, PLEASE ADD STORES
+          {role==="admin" ? " NO STORES AVAILABLE, PLEASE ADD STORES" : "NO STORES AVAILBALE" } 
           </Link>
         )}
    </div>

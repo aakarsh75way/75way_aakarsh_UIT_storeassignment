@@ -1,24 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { Store, User } from '../../../../utils/types';
 
-type User = {
-  _id: string;
-  username: string;
-  email: string;
-  password: string;
-  role: string;
-  preference: string;
-};
- type Store = {
-    _id: string;
-    name: string;
-    openTime: string;
-    closeTime: string;
-    employees: Array<string>;
-    timeSlotInterval: number;
-    capacityPerSlot: number;
-    __v: number;
-  };
 type Props={
     store: Store;
     setActive:React.Dispatch<React.SetStateAction<boolean>>

@@ -2,17 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { generateTimeSlots } from '../../../../utils/genrateTimeSlots';
 import AppointmentSelection from './AppointmentSelection';
+import { Store } from '../../../../utils/types';
 
-type Store = {
-  _id: string;
-  name: string;
-  openTime: string;
-  closeTime: string;
-  employees: Array<string>;
-  timeSlotInterval: number;
-  capacityPerSlot: number;
-  __v: number;
-};
+
 
 const SingleStorePage = () => {
   const { id } = useParams();
