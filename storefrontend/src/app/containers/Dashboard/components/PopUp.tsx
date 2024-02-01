@@ -13,8 +13,9 @@ type User={
 type Props = {
   selectedUser:User | null
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  onUpdate: () => void
 };
-const PopUp = ({ setActive,selectedUser }: Props) => {
+const PopUp = ({ setActive,selectedUser,onUpdate }: Props) => {
   const [formData, setFormData] = useState({
    role:selectedUser?.role
   });
@@ -49,6 +50,7 @@ const PopUp = ({ setActive,selectedUser }: Props) => {
           progress: undefined,
           theme: "light",
         });
+        onUpdate()
         setActive(false);
       } else {
         toast.error("Something went wrong", {
@@ -70,18 +72,7 @@ const PopUp = ({ setActive,selectedUser }: Props) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center backdrop-filter ">
       <div className="bg-[#000300] p-6 rounded-lg shadow-md w-full max-w-md">
-        <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
+    
         <h2 className="text-[30px] text-white font-bold mb-4 text-center">
           Update User
         </h2>
@@ -90,14 +81,18 @@ const PopUp = ({ setActive,selectedUser }: Props) => {
             <label className="block text-white text-sm font-bold mb-2">
               Role
             </label>
-            <input
-              type="text"
+            <select
+            
               name="role"
               value={formData.role}
               onChange={handleChange}
-              className="w-full border p-2 rounded"
-              required
-            />
+              className="w-full border p-2 rounded">
+          
+           <option value="employee">Employee</option>
+           <option value="user">User</option>
+
+
+              </select>
           </div>
         
           {/* Add other input fields similarly */}

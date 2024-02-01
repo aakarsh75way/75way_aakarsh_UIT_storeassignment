@@ -38,6 +38,9 @@ const Usertable = () => {
     setSelectedUser(user);
     setActive(true);
   };
+  const onUpdate=()=>{
+    fetchUsers()
+  }
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full bg-gray-100 border border-gray-300">
@@ -87,7 +90,7 @@ const Usertable = () => {
           )}
         </tbody>
       </table>
-      {active && <PopUp setActive={setActive} selectedUser={selectedUser} />}
+      {active && <PopUp setActive={setActive} selectedUser={selectedUser} onUpdate={onUpdate} />}
     </div>
   );
 };
