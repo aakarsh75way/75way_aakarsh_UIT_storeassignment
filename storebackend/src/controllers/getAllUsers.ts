@@ -2,10 +2,18 @@ import React from 'react'
 import  { Request, Response } from 'express';
 import Store from '../models/Store';
 import User from '../models/User';
-
-const getAllUsers =async (req:Request,res:Response) => {
-console.log("YAha aya ma");
-
+interface CustomRequest extends Request {
+  decoded?: {
+    userId: string;
+    email: string;
+    role: string;
+  };
+  userRole?: string;
+}
+const getAllUsers =async (req:CustomRequest,res:Response) => {
+  if (req.userRole !== 'admin') {
+    return res.status(403).json({ error: 'Forbidden. Only admin can upload documents.' });
+  }
     try {
       const users = await User.find({ role: { $ne: 'admin' } });
      console.log(users)

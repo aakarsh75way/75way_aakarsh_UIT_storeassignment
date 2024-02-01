@@ -14,7 +14,11 @@ export const extractUserRole = (
   res: Response,
   next: NextFunction
 ) => {
-  const jwtToken = req.cookies.token;
+  const authHeader = req.headers["authorization"];
+  if (!authHeader) {
+    return res.status(401).json({ error: "Unauthorized. Token not provided." });
+  }
+  const jwtToken = authHeader.split(" ")[1];
 
   // Verify and decode the JWT
   jwt.verify(
