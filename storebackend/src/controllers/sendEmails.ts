@@ -6,12 +6,15 @@ const sendEmails = async (req:Request, res:Response) => {
   try {
     const { id } = req.params;
     const { emails } = req.body;
+const newId=new mongoose.Types.ObjectId(id)
 
-    const store = await Store.findOneAndUpdate(
-   new mongoose.Types.ObjectId(id) ,
-      { $addToSet: { employees: { $each: emails } } },
-      { new: true }
-    );
+// Update the store by adding emails to the 'employees' array
+const store = await Store.findByIdAndUpdate(
+  { _id: id },
+  { $addToSet: { employees: { $each: emails } } },
+  { new: true }
+);
+  
 
     if (store) {
       return res.status(200).json({ message: 'Emails added successfully', store });
