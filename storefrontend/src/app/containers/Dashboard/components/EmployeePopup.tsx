@@ -5,11 +5,12 @@ import { Store, User } from '../../../../utils/types';
 type Props={
     store: Store;
     setActive:React.Dispatch<React.SetStateAction<boolean>>
+    onUpdate:()=>void
 }
 
   
   
-const EmployeePopup = ({setActive,store}:Props) => {
+const EmployeePopup = ({setActive,store,onUpdate}:Props) => {
   const [users, setUsers] = useState<User[] | null>([]);
   const [selectedEmployees, setSelectedEmployees] = useState<string[]>([]);
 
@@ -55,27 +56,13 @@ const EmployeePopup = ({setActive,store}:Props) => {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success("Emails sent successfully", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        onUpdate()
+        setActive(false)
+       
       } else {
-        toast.error(data.error, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        console.log("error",data)
+        setActive(false)
+      
       }
     } catch (error) {
       console.error(error);
@@ -83,33 +70,23 @@ const EmployeePopup = ({setActive,store}:Props) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center backdrop-filter ">
-      <div className="absolute bg-[#000300] p-6 rounded-lg z-20 max-h-max shadow-md w-full max-w-md">
-        <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
+    <div className="fixed  inset-0 flex items-center z-[1000] justify-center backdrop-filter ">
+      <div className="bg-[#000300] p-6 rounded-lg max-h-max shadow-md w-full  max-w-md">
+  
         <h2 className="text-[30px] text-white font-bold mb-4 text-center">
           Select Employees
         </h2>
         <div className="flex flex-col items-start space-y-2">
           {users?.map((user) => (
-            <div key={user._id} className="flex items-center">
+            <div key={user._id} className="flex items-center gap-[10px]">
               <input
                 type="checkbox"
                 checked={selectedEmployees.includes(user.email)}
                 onChange={() => handleCheckboxChange(user.email)}
+                
                 className="mr-2"
               />
-              <span className="text-white">{user.email}</span>
+              <span className="text-white text-[20px] font-bold">{user.email}</span>
             </div>
           ))}
         </div>

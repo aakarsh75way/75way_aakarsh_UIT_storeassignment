@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import EmployeePopup from "./EmployeePopup";
-import { StoreOverviewProps } from "../../../../utils/types";
+import { Store } from "../../../../utils/types";
 
 
+interface Props{
+  store:Store
+  onUpdate:()=>void
+}
 
-
-const StoreOverview = ({ store }: StoreOverviewProps) => {
+const StoreOverview = ({ store,onUpdate }: Props) => {
   const role = localStorage.getItem("role");
   const[active,setActive]=useState(false)
   return (
-    <div className="">
+    <div className="relative">
       <div className=" bg-gray-100 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
-        <div className=" relative h-60 w-full mb-4 overflow-hidden bg-gray-200">
+        <div className="  h-60 w-full mb-4 overflow-hidden bg-gray-200">
           <img
             src={`https://source.unsplash.com/400x200/?store,${store.name}`}
             alt={`Store: ${store.name}`}
@@ -40,9 +43,9 @@ const StoreOverview = ({ store }: StoreOverviewProps) => {
             </button>
           )}
         </div>
-        {active && <EmployeePopup setActive={setActive} store={store} />}
+       
       </div>
-      
+      {active && <EmployeePopup setActive={setActive} store={store}  onUpdate={ onUpdate} />}
     </div>
   );
 };

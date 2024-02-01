@@ -14,27 +14,28 @@ const SingleStorePage = () => {
   const [error, setError] = useState<string | null>(null);
   const [res, setRes] = useState<number | null>(null);
 
-
-  useEffect(() => {
-    const fetchStore = async () => {
-      try {
-        const response = await fetch(`http://localhost:4000/api/getstore/${id}`);
-        const res: Store = await response.json();
-        if (res) {
-          setSelectedStore(res);
-       
-        } else {
-          setError('Error fetching store');
-        }
-      } catch (err) {
+  const fetchStore = async () => {
+    try {
+      const response = await fetch(`http://localhost:4000/api/getstore/${id}`);
+      const res: Store = await response.json();
+      if (res) {
+        setSelectedStore(res);
+     
+      } else {
         setError('Error fetching store');
-      } finally {
-        setLoading(false);
       }
-    };
-
+    } catch (err) {
+      setError('Error fetching store');
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
     fetchStore();
   }, [id]);
+
+
+  
 
   const handleSlotSelection = async (slotId: number) => {
     try {

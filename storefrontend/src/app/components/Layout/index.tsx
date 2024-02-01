@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return <Navigate to="/auth/login" />;
   }
   return (
-    <div className="bg-white h-screen overflow-auto">
+    <div className="bg-gradient-to-r from-gray-200 to-gray-300 h-screen overflow-auto">
       <Navbar />
     {children}
    </div>

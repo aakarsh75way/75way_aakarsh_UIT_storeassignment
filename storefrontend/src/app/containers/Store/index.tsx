@@ -21,14 +21,17 @@ const StorePage = () => {
   useEffect(() => {
     fetchStores();
   }, []);
+  const onUpdate=()=>{
+    fetchStores();
+  }
 
   return (
     <Layout>
-      <div className="flex gap-[40px] h-screen">
+      <div className="flex gap-[40px] h-screen flex-wrap p-5 ml-20">
         {Array.isArray(stores) && stores.length ? (
           stores.map((store) => (
            
-            <StoreOverview key={store._id} store={store} />
+            <StoreOverview key={store._id} store={store} onUpdate={onUpdate} />
          
           ))
         ) : (

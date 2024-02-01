@@ -21,7 +21,7 @@ const Navbar = () => {
 
 
   return (
-    <div className='bg-black flex justify-between items-center h-24 max-w-[100%] mx-auto px-4 text-white'>
+    <div className='bg-[#000300] flex justify-between items-center h-24 max-w-[100%] mx-auto px-4 text-white'>
       <h1 className='w-full text-3xl font-bold'>
         <span style={{ color: '#FF5733' }}>My</span>
         <span style={{ color: '#00df9a' }}>Store</span>
